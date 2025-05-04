@@ -26,19 +26,36 @@ class FamilyStructure:
         return generated_id
 
     def add_member(self, member):
-        ## You have to implement this method
-        ## Append the member to the list of _members
-        pass
+        member["id"] = self._generateId()
+        member["last_name"] = self.last_name
+        self._members.append(member)
+        print("self members", self._members)
+        return member
+    
+    def update_member(self, id, new_data):
+        updatable_fields = {"first_name", "age", "lucky_numbers"}
+        
+        for member in self._members:
+            if member["id"] == id:
+                for key, value in new_data.items():
+                    if key in updatable_fields:
+                        member[key] = value
+            print("Member updated:", self._members)
+            return member
 
     def delete_member(self, id):
-        ## You have to implement this method
-        ## Loop the list and delete the member with the given id
-        pass
+        for member in self._members:
+            if member["id"] == id:
+                self._members.remove(member)
+                print("Member deleted:", member)
+                return True
+        return False
 
     def get_member(self, id):
-        ## You have to implement this method
-        ## Loop all the members and return the one with the given id
-        pass
+        for member in self._members:
+            if member["id"] == id:
+                print("Member:", member)
+                return member
 
     # This method is done, it returns a list with all the family members
     def get_all_members(self):
